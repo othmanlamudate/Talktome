@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:talktome/auth/signup.dart';
-import 'package:talktome/widgets/constants.dart';
+
+import '../widgets/constants.dart';
 import '../widgets/input.dart';
 import '../widgets/mybutton.global.dart';
 import '../widgets/mysocial.login.dart';
+import 'signup.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

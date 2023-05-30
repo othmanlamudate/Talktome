@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:talktome/pages/languages.dart';
+import 'package:talktome/Views/pages/languages.dart';
 import '../auth/Login.dart';
 import '../auth/signup.dart';
+
 import '../locale/locale_controller.dart';
 import '../pages/help.dart';
 import '../pages/home_page.dart';

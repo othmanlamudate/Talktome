@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:talktome/widgets/constants.dart';
+
+import '../widgets/constants.dart';
 import '../widgets/input.dart';
 import '../widgets/mybutton.global.dart';
 import 'Login.dart';

@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:talktome/pages/home_page.dart';
+
+import '../../auth/Login.dart';
 
 
 class SplashView extends StatelessWidget {
@@ -11,7 +12,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds:6), () {
-      Get.off(const HomePage());
+      Get.off(const Login());
     });
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark

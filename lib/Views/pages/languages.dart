@@ -1,8 +1,10 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:talktome/locale/locale_controller.dart';
-import 'package:talktome/widgets/my_drawer.dart';
+import 'package:talktome/Views/locale/locale_controller.dart';
+
+
+import '../widgets/my_drawer.dart';
 
 class Language extends StatelessWidget {
   const Language({super.key});

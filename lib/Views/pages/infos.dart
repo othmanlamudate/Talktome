@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:talktome/widgets/my_drawer.dart';
 import '../widgets/constants.dart';
+import '../widgets/my_drawer.dart';
 
 class Infos extends StatelessWidget {
   const Infos({super.key});

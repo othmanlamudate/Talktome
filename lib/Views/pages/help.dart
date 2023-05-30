@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 import '../widgets/constants.dart';
-import 'package:talktome/widgets/my_drawer.dart';
+import '../widgets/my_drawer.dart';
+
 
 
 class Help extends StatelessWidget {
@@ -69,9 +71,9 @@ class Help extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Row(
+                  const Row(
                     // mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.email),
                       SizedBox(
                         width: 10,

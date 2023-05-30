@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_share/flutter_share.dart';
-import 'package:talktome/pages/flutter_plu.dart';
-import 'package:talktome/widgets/my_drawer.dart';
+import 'package:talktome/Views/pages/flutter_plu.dart';
+
 import '../widgets/constants.dart';
+import '../widgets/my_drawer.dart';
 import '../widgets/my_icon_button.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

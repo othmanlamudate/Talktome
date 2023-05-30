@@ -1,16 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talktome/locale/locale_controller.dart';
-import 'package:talktome/locale/translation.dart';
+import 'package:talktome/Views/locale/locale_controller.dart';
+import 'package:talktome/Views/locale/translation.dart';
 import 'package:get/get.dart';
-import 'package:talktome/pages/splash.view.dart';
-import 'package:talktome/theme/theme.dart';
+import 'package:talktome/Views/pages/splash.view.dart';
+import 'package:talktome/Views/theme/theme.dart';
 
 // import 'package:shared_preferences/shared_preferences.dart';
 SharedPreferences? sharepref;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharepref = await SharedPreferences.getInstance();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
