@@ -14,7 +14,7 @@ class Firebase_{
         password: password.trim()
       );
 
-      return userCredential.user?.uid;
+      return userCredential;
 
 
     }catch(e){

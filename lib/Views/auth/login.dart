@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talktome/viewModel/FirebaseServices.dart';
 
 import '../widgets/constants.dart';
 import '../widgets/input.dart';
 import '../widgets/mybutton.global.dart';
 import '../widgets/mysocial.login.dart';
 import 'signup.dart';
+
+import '../../viewModel/FirebaseServices.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,12 +23,13 @@ class LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final FirebaseServices firebaseServices = FirebaseServices();
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: Theme.of(context).brightness == Brightness.dark
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? const Color(0xFF021638)
           : Colors.white,
       bottomNavigationBar: Container(
@@ -36,8 +41,8 @@ class LoginState extends State<Login> {
               "ydha".tr,
             ),
             InkWell(
-              onTap: ()  => Get.off(const Register()),
-              child:Text(
+              onTap: () => Get.off(const Register()),
+              child: Text(
                 "registre".tr,
                 style: TextStyle(
                   color: myColor,
@@ -48,9 +53,9 @@ class LoginState extends State<Login> {
         ),
       ),
       body: isLoading == true
-          ?  Center(
+          ? Center(
               child: CircularProgressIndicator(
-                color:myColor,
+                color: myColor,
               ),
             )
           : Center(
@@ -77,8 +82,7 @@ class LoginState extends State<Login> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "loginacc".tr,
-                            style:const TextStyle(
-                                fontWeight: FontWeight.w600),
+                            style: const TextStyle(fontWeight: FontWeight.w600),
                           )),
                       const SizedBox(
                         height: 10,
@@ -109,7 +113,7 @@ class LoginState extends State<Login> {
                       //Mot de passe
                       Input(
                         label: "pw".tr,
-                        hint: "...........",
+                        hint: "***********",
                         keyboardType: TextInputType.visiblePassword,
                         isObscure: true,
                         validator: (value) {
@@ -130,9 +134,15 @@ class LoginState extends State<Login> {
                       //btn pour connexion
                       MyButton(
                         text: "login".tr,
-                        color:myColor,
+                        color: myColor,
                         onPressed: () {
-                         
+                          try {
+                            var user = firebaseServices.signin(
+                                emailController.text, passwordController.text);
+                                
+                          } on FirebaseAuthException catch (e) {
+                            throw FirebaseAuthException(code: e.code);
+                          }
                         },
                         textColor: Colors.white,
                       ),
@@ -149,5 +159,3 @@ class LoginState extends State<Login> {
     );
   }
 }
-
-
