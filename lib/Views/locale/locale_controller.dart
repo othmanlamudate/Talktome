@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:talktome/Views/main.dart';
+import 'package:talktome/main.dart';
 
 class MyLocaleController extends GetxController {
   Locale initialLang = sharepref!.getString("lang") == "en"

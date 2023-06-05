@@ -24,7 +24,7 @@ class LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Theme.of(context).brightness == Brightness.dark
+    backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? const Color(0xFF021638)
           : Colors.white,
       bottomNavigationBar: Container(

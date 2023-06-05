@@ -47,7 +47,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ),
-                const Text("MALAK LAKSAI", style: TextStyle(fontSize: 20))
+                Text("MALAK LAKSAI", style: TextStyle(fontSize: 20))
               ],
             ),
           ),

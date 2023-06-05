@@ -60,7 +60,7 @@ class Help extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-             Text(
+            Text(
                 'helpContenu'.tr,
                 style: const TextStyle(
                   fontSize: 20,
@@ -71,7 +71,7 @@ class Help extends StatelessWidget {
               ),
               Column(
                 children: [
-                  const Row(
+                  Row(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.email),
