@@ -9,6 +9,7 @@ import '../locale/locale_controller.dart';
 import '../pages/help.dart';
 import '../pages/home_page.dart';
 import '../pages/infos.dart';
+import '../pages/textToGcode.dart';
 import 'constants.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -82,6 +83,16 @@ class _MyDrawerState extends State<MyDrawer> {
                   //Firebase signout 
                   FirebaseAuth.instance.signOut();
                   Get.off(const Login());
+                  
+                  },
+              ),
+
+              ListTile(
+                title: Text("text To Gcode".tr),
+                leading: const Icon(Icons.text_fields_sharp),
+                onTap: (){
+                  
+                  Get.off(const textToGcode());
                   
                   },
               ),
