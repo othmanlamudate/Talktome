@@ -78,7 +78,12 @@ class _MyDrawerState extends State<MyDrawer> {
               ListTile(
                 title: Text("log out".tr),
                 leading: const Icon(Icons.logout),
-                onTap: () => Get.off(const Login()),
+                onTap: (){
+                  //Firebase signout 
+                  FirebaseAuth.instance.signOut();
+                  Get.off(const Login());
+                  
+                  },
               ),
             ],
           ),
