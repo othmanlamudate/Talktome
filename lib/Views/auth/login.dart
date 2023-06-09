@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talktome/Views/pages/home_page.dart';
 import 'package:talktome/viewModel/FirebaseServices.dart';
 
 import '../widgets/constants.dart';
@@ -8,8 +12,6 @@ import '../widgets/input.dart';
 import '../widgets/mybutton.global.dart';
 import '../widgets/mysocial.login.dart';
 import 'signup.dart';
-
-import '../../viewModel/FirebaseServices.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -23,8 +25,67 @@ class LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  //firebase Instence by othman
   final FirebaseServices firebaseServices = FirebaseServices();
+
   bool isLoading = false;
+  bool loged = true;
+
+
+   Future Alert() {
+    return AwesomeDialog(
+            context: context,
+            dialogType: DialogType.error,
+            btnCancel: MaterialButton(
+              color: Colors.grey,
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "Cancel",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            title: "Alert",
+            body: const Text(
+                "The email or password is wrong , or the account does not exist"))
+        .show();
+  }
+
+
+
+
+  Future login() async {
+    if (_formKey.currentState!.validate()) {
+      showDialog(
+        context: context,
+        builder: (_) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+        
+      );
+      try {
+        // ignore: unused_local_variable
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim());
+
+        Get.offAll(() => const HomePage());
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          print('No user found for that email.');
+          Alert();
+        } else if (e.code == 'wrong-password') {
+          print('Wrong password provided for that user.');
+          Alert();
+        }else{
+          Alert();
+        }
+      }
+    }
+  }
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +113,7 @@ class LoginState extends State<Login> {
           ],
         ),
       ),
-      body: isLoading == true
+      body: isLoading
           ? Center(
               child: CircularProgressIndicator(
                 color: myColor,
@@ -113,7 +174,7 @@ class LoginState extends State<Login> {
                       //Mot de passe
                       Input(
                         label: "pw".tr,
-                        hint: "***********",
+                        hint: "",
                         keyboardType: TextInputType.visiblePassword,
                         isObscure: true,
                         validator: (value) {
@@ -135,15 +196,7 @@ class LoginState extends State<Login> {
                       MyButton(
                         text: "login".tr,
                         color: myColor,
-                        onPressed: () {
-                          try {
-                            var user = firebaseServices.signin(
-                                emailController.text, passwordController.text);
-                                
-                          } on FirebaseAuthException catch (e) {
-                            throw FirebaseAuthException(code: e.code);
-                          }
-                        },
+                        onPressed: login,
                         textColor: Colors.white,
                       ),
                       SizedBox(

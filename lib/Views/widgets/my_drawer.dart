@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talktome/Views/pages/languages.dart';
 import '../auth/Login.dart';
-import '../auth/signup.dart';
+
 
 import '../locale/locale_controller.dart';
 import '../pages/help.dart';
@@ -47,7 +48,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ),
-                Text("MALAK LAKSAI", style: TextStyle(fontSize: 20))
+                Text(FirebaseAuth.instance.currentUser!.email.toString(), style: TextStyle(fontSize: 20))
               ],
             ),
           ),
@@ -73,14 +74,10 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Column(
             children: [
+              
               ListTile(
-                title: Text("register".tr),
-                leading: const Icon(Icons.person_add),
-                onTap: () => Get.off(const Register()),
-              ),
-              ListTile(
-                title: Text("login".tr),
-                leading: const Icon(Icons.login),
+                title: Text("log out".tr),
+                leading: const Icon(Icons.logout),
                 onTap: () => Get.off(const Login()),
               ),
             ],

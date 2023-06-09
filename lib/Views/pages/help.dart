@@ -60,7 +60,7 @@ class Help extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-            Text(
+             Text(
                 'helpContenu'.tr,
                 style: const TextStyle(
                   fontSize: 20,

@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: Themes.customLightTheme,
       darkTheme: Themes.customDarkTheme,
+      //home: const SplashView(),
       home: const SplashView(),
-
       translations: Translation(),
       locale: controller.initialLang,
       fallbackLocale: const Locale("en"),

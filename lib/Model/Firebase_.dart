@@ -13,7 +13,7 @@ class Firebase_{
         email: email.trim(),
         password: password.trim()
       );
-
+      print(userCredential);
       return userCredential;
 
 
@@ -22,6 +22,23 @@ class Firebase_{
     }
   }
 
+  Object? SignupWithEmailAndPassword(String email,String password) async{
+    try{
+
+      UserCredential userCredential = await firebase.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim()
+      );
+     
+      return userCredential;
+
+    }on FirebaseAuthException catch(e){
+      if(e.code=='email-already-in-use'){
+        return true;
+      }
+      return null;
+    }
+  }
   singOut()async{
     await firebase.signOut();
   }
