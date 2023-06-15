@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talktome/Views/pages/home_page.dart';
 
 import '../../viewModel/FirebaseServices.dart';
-import '../widgets/constants.dart';
+import '../../constants/constants.dart';
 import '../widgets/input.dart';
 import '../widgets/mybutton.global.dart';
 import 'Login.dart';
@@ -24,7 +27,68 @@ class RegistreState extends State<Register> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _passwdConfirmController = TextEditingController();
+  // ignore: non_constant_identifier_names
   final FirebaseServices FB = FirebaseServices();
+
+     // ignore: non_constant_identifier_names
+     Future AlertSuccess() {
+    return AwesomeDialog(
+            context: context,
+            dialogType: DialogType.success,
+            btnCancel: MaterialButton(
+              color: Colors.grey,
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "Go To login",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            title: "Alert",
+            body: const Text(
+                "your acount has been created successfully"))
+        .show();
+  }
+
+  // ignore: non_constant_identifier_names
+  Future AlertError() {
+    return AwesomeDialog(
+            context: context,
+            dialogType: DialogType.error,
+            btnCancel: MaterialButton(
+              color: Colors.grey,
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "Retry",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            title: "Alert",
+            body: const Text(
+                "Samething wrong !! The account already exists for that email."))
+        .show();
+  }
+  // ignore: non_constant_identifier_names
+  Future AlertWeakPassword() {
+    return AwesomeDialog(
+            context: context,
+            dialogType: DialogType.error,
+            btnCancel: MaterialButton(
+              color: Colors.grey,
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "Retry",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            title: "Alert",
+            body: const Text(
+                "Samething wrong !! The password provided is too weak.   "))
+        .show();
+  }
+
+
+
+
 
   Future? signUp() async {
     if (_formKey.currentState!.validate()) {
@@ -41,18 +105,30 @@ class RegistreState extends State<Register> {
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
-        Get.offAll(() => const Login()) ;
+        AlertSuccess();
+        Timer(const Duration(seconds: 5), () {
+         Get.offAll(() => const HomePage()) ;
+        });
+        
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
+          if (kDebugMode) {
+            print('The password provided is too weak.');
+          }
+          AlertWeakPassword();
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
+          if (kDebugMode) {
+            print('The account already exists for that email.');
+          }
+          AlertError();
         }
         Timer(const Duration(seconds: 6), () {
           Navigator.pop(context);
         });
       } catch (e) {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
         Timer(const Duration(seconds: 6), () {
           Navigator.pop(context);
         });

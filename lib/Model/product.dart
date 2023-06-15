@@ -1,40 +1,44 @@
-
-
 class product {
+  String title = "";
+  String image = "";
+  String subtitle = "";
+  double prix = 0;
+  bool isFree = false;
+  String description = "";
+  List<String> gcode=[];
 
-   String title="";
-   String image="";
-   double prix=0;
-   bool isFree = false;
-   String description="";
+  product(String title, String subtitle, String image, double prix, bool isFree,
+      String description,List<String> gcode) {
+    title = title;
+    subtitle = subtitle;
+    image = image;
+    prix = prix;
+    isFree = isFree;
+    description = description;
+  }
 
-   product(String title,String image,double prix,bool isFree,String description){
-        title=title;
-        image=image;
-        prix=prix;
-        isFree=isFree;
-        description=description;
-   }
-
-   String getTitle(){
+  String getTitle() {
     return title;
-   }
-   String getimage(){
+  }
+
+  String getimage() {
     return image;
-   }
+  }
 
-   double getPrix(){
+  double getPrix() {
     return prix;
-   }
-   bool getIsFree(){
-    return isFree;
-   }
-   String getDescription(){
-    return description;
-   }
+  }
 
-   @override
-    String toString(){
+  bool getIsFree() {
+    return isFree;
+  }
+
+  String getDescription() {
+    return description;
+  }
+
+  @override
+  String toString() {
     return "$title $image $prix  $description";
-   }
+  }
 }

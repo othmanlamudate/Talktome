@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talktome/Views/pages/home_page.dart';
 import 'package:talktome/viewModel/FirebaseServices.dart';
+
 
 import '../widgets/constants.dart';
 import '../widgets/input.dart';
@@ -33,6 +35,7 @@ class LoginState extends State<Login> {
   bool loged = true;
 
 
+   // ignore: non_constant_identifier_names
    Future Alert() {
     return AwesomeDialog(
             context: context,
@@ -73,10 +76,14 @@ class LoginState extends State<Login> {
         Get.offAll(() => const HomePage());
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
-          print('No user found for that email.');
+          if (kDebugMode) {
+            print('No user found for that email.');
+          }
           Alert();
         } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
+          if (kDebugMode) {
+            print('Wrong password provided for that user.');
+          }
           Alert();
         }else{
           Alert();

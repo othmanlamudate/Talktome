@@ -27,6 +27,8 @@ const Map<String, String> en = {
   "plpass":"Please enter a password",
   "pssm":"Password must be at least 8 characters",
   "cya":"Create your account",
+  "logout":"Logout",
+  "chtheme":"Change theme",
 
 
 };

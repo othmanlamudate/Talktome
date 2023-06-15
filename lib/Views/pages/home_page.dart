@@ -4,7 +4,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_share/flutter_share.dart';
 import 'package:talktome/Views/pages/flutter_plu.dart';
 
-import '../widgets/constants.dart';
+import '../../constants/constants.dart';
 import '../widgets/my_drawer.dart';
 import '../widgets/my_icon_button.dart';
 

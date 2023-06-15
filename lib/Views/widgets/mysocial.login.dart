@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:talktome/viewModel/FirebaseServices.dart';
-import '../pages/home_page.dart';
+
 import 'button.social.dart';
 
 //my social login
@@ -45,17 +44,24 @@ class MySocialLogin extends StatelessWidget {
             onTap: () {
               try {
                 // ignore: unused_local_variable
-                print(FirebaseServices.signInWithGoogle());
+                if (kDebugMode) {
+                  print(FirebaseServices.signInWithGoogle());
+                }
                 
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
-                  print('No user found for that email.');
+                  if (kDebugMode) {
+                    print('No user found for that email.');
+                  }
                 } else if (e.code == 'wrong-password') {
-                  print('Wrong password provided for that user.');
+                  if (kDebugMode) {
+                    print('Wrong password provided for that user.');
+                  }
                 }
                 Timer(const Duration(seconds: 6), () {
                   Navigator.pop(context);
                 });
+              // ignore: empty_catches
               }catch(e){
                 
               }

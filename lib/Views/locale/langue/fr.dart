@@ -27,5 +27,7 @@ const Map<String, String> fr = {
   "plpass":"Veuillez entrer un mot de passe",
   "pssm":"Le mot de passe doit comporter au moins 8 caractères",
   "cya":"Créez votre compte",
+  "logout":"Se déconnecter",
+  "chtheme":"Changer de thème",
 
 };

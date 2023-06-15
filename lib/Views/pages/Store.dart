@@ -1,71 +1,64 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
 import 'package:talktome/Model/product.dart';
 
-import '../widgets/constants.dart';
+import '../../constants/constants.dart';
+import '../widgets/ProductCard.dart';
 import '../widgets/my_drawer.dart';
 
-
-
-class Strore extends StatefulWidget {
-  const Strore({super.key});
+class Store extends StatefulWidget {
+  const Store({super.key});
 
   @override
-  State<Strore> createState() => _StroreState();
+  State<Store> createState() => _StoreState();
 }
 
-class _StroreState extends State<Strore> {
-
-  var products=[
-    product("1", "imge1", 125, false, "description"),
-    product("2", "imge2", 0, true, "description"),
-    product("3", "imge3", 456, false, "description"),
-    product("4", "imge4", 0, true, "description"),
-    product("5", "imge5", 184, false, "description"),
-
+class _StoreState extends State<Store> {
+  var products = [
+    product("1","sub","imge1", 125, false, "description",["fff","ffff"]),
+    product("2", "sub","imge2", 0, true, "description",["fff","ffff"]),
+    product("3","sub", "imge3", 456, false, "description",["fff","ffff"]),
+    product("4","sub", "imge4", 0, true, "description",["fff","ffff"]),
+    product("5", "sub","imge5", 184, false, "description",["fff","ffff"]),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? const Color(0xFF021638)
-            : Colors.white,
-        drawer: const MyDrawer(),
-        appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: IconButton(
-                  icon: (Icon(
-                    Icons.search_off_outlined,
-                    color: myColor,
-                    size: 30,
-                  )),
-                  onPressed: () {
-                  
-                  }),
-            )
-          ],
-          elevation: 0,
-          backgroundColor: Colors.transparent,),
-          body: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
-            itemCount: products.length,
+          ? const Color(0xFF021638)
+          : Colors.white,
+      drawer: const MyDrawer(),
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: IconButton(
+                icon: (Icon(
+                  Icons.search_outlined,
+                  color: myColor,
+                  size: 30,
+                )),
+                onPressed: () {}),
+          )
+        ],
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1, // Number of objects in each row
+              crossAxisSpacing: 10.0, // Spacing between columns
+              mainAxisSpacing: 10.0,
+              childAspectRatio: 0.9,// Spacing between rows
+            ),
+            itemCount: 80,
             itemBuilder: (BuildContext ctx, index) {
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Text(products[index].getTitle())
-                
-                ,
-              );
+              return FloatingImageCard();
             }),
+      ),
     );
   }
 }

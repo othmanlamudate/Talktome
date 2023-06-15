@@ -1,15 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talktome/Views/pages/chat_screen.dart';
 import 'package:talktome/Views/pages/languages.dart';
+import '../../constants/constants.dart';
 import '../auth/Login.dart';
 
 
 import '../locale/locale_controller.dart';
+import '../pages/Store.dart';
 import '../pages/help.dart';
 import '../pages/home_page.dart';
 import '../pages/infos.dart';
-import 'constants.dart';
+import '../pages/textToGcode.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -48,7 +51,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ),
-                Text(FirebaseAuth.instance.currentUser!.email.toString(), style: TextStyle(fontSize: 20))
+                Text(FirebaseAuth.instance.currentUser!.email.toString(), style:const TextStyle(fontSize: 20))
               ],
             ),
           ),
@@ -72,19 +75,45 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: const Icon(Icons.translate),
             onTap: () => Get.off(const Language()),
           ),
+            ListTile(
+            title:const Text("Chat AI"),
+            leading: const Icon(Icons.chat),
+            onTap: () => Get.off(const ChatScreen()),
+            
+          ),
           Column(
             children: [
               
               ListTile(
-                title: Text("log out".tr),
+                title: Text("logout".tr),
                 leading: const Icon(Icons.logout),
-                onTap: () => Get.off(const Login()),
+                onTap: (){
+                  //Firebase signout 
+                  FirebaseAuth.instance.signOut();
+                  Get.off(const Login());
+                  
+                  },
+              ),
+              ListTile(
+            title: Text("infos".tr),
+            leading: const Icon(Icons.store),
+            onTap: () => Get.off(()=>const Store()),
+          ),
+
+              ListTile(
+                title: Text("text To Gcode".tr),
+                leading: const Icon(Icons.text_fields_sharp),
+                onTap: (){
+                  
+                  Get.off(const textToGcode());
+                  
+                  },
               ),
             ],
           ),
           const Divider(),
           ListTile(
-            title:const Text("change Theme"),
+            title:Text("chtheme".tr),
             leading: const Icon(Icons.mode_night),
             onTap: (){
               if(Get.isDarkMode){
