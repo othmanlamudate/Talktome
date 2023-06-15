@@ -6,7 +6,6 @@ import 'package:talktome/Views/pages/languages.dart';
 import '../../constants/constants.dart';
 import '../auth/Login.dart';
 
-
 import '../locale/locale_controller.dart';
 import '../pages/Store.dart';
 import '../pages/help.dart';
@@ -51,7 +50,8 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ),
-                Text(FirebaseAuth.instance.currentUser!.email.toString(), style:const TextStyle(fontSize: 20))
+                Text(FirebaseAuth.instance.currentUser!.email.toString(),
+                    style: const TextStyle(fontSize: 20))
               ],
             ),
           ),
@@ -61,70 +61,67 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () => Get.off(const HomePage()),
           ),
           ListTile(
-            title: Text("infos".tr),
-            leading: const Icon(Icons.info),
-            onTap: () => Get.off(const Infos()),
-          ),
-          ListTile(
-            title: Text("help".tr),
-            leading: const Icon(Icons.help),
-            onTap: () => Get.off(const Help()),
-          ),
-           ListTile(
-            title: Text("languages".tr),
-            leading: const Icon(Icons.translate),
-            onTap: () => Get.off(const Language()),
-          ),
-            ListTile(
-            title:const Text("Chat AI"),
+            title: const Text("Chat AI"),
             leading: const Icon(Icons.chat),
             onTap: () => Get.off(const ChatScreen()),
-            
+            trailing: const Icon(Icons.lock),
+            enabled: false,
+          ),
+          ListTile(
+            title: Text("Store".tr),
+            leading: const Icon(Icons.store),
+            onTap: () => Get.off(() => const Store()),
+            trailing: const Icon(Icons.lock),
+            enabled: false,
+          ),
+          ListTile(
+            title: Text("Text To G-code".tr),
+            leading: const Icon(Icons.text_fields_sharp),
+            onTap: () {
+              Get.off(const textToGcode());
+            },
           ),
           Column(
             children: [
-              
               ListTile(
-                title: Text("logout".tr),
-                leading: const Icon(Icons.logout),
-                onTap: (){
-                  //Firebase signout 
-                  FirebaseAuth.instance.signOut();
-                  Get.off(const Login());
-                  
-                  },
+                title: Text("infos".tr),
+                leading: const Icon(Icons.info),
+                onTap: () => Get.off(const Infos()),
               ),
               ListTile(
-            title: Text("infos".tr),
-            leading: const Icon(Icons.store),
-            onTap: () => Get.off(()=>const Store()),
-          ),
-
-              ListTile(
-                title: Text("text To Gcode".tr),
-                leading: const Icon(Icons.text_fields_sharp),
-                onTap: (){
-                  
-                  Get.off(const textToGcode());
-                  
-                  },
+                title: Text("help".tr),
+                leading: const Icon(Icons.help),
+                onTap: () => Get.off(const Help()),
               ),
             ],
           ),
           const Divider(),
           ListTile(
-            title:Text("chtheme".tr),
+            title: Text("chtheme".tr),
             leading: const Icon(Icons.mode_night),
-            onTap: (){
-              if(Get.isDarkMode){
+            onTap: () {
+              if (Get.isDarkMode) {
                 Get.changeTheme(ThemeData.light());
-              }
-              else{
+              } else {
                 Get.changeTheme(ThemeData.dark());
               }
             },
           ),
-
+          ListTile(
+            title: Text("languages".tr),
+            leading: const Icon(Icons.translate),
+            onTap: () => Get.off(const Language()),
+          ),
+          const Divider(),
+          ListTile(
+            title: Text("logout".tr),
+            leading: const Icon(Icons.logout),
+            onTap: () {
+              //Firebase signout
+              FirebaseAuth.instance.signOut();
+              Get.off(const Login());
+            },
+          ),
         ],
       ),
     );

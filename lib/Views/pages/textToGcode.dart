@@ -4,7 +4,6 @@ import '../widgets/my_drawer.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-
 class textToGcode extends StatefulWidget {
   const textToGcode({super.key});
 
@@ -13,48 +12,48 @@ class textToGcode extends StatefulWidget {
 }
 
 class _textToGcodeState extends State<textToGcode> {
-  var textController=TextEditingController();
-  
-  var gcode="";
+  var textController = TextEditingController();
+
+  var gcode = "";
 
   Future getText(String txt) async {
+    var url = Uri.https(
+        'lamudateothman.pythonanywhere.com', '/code/$txt', {'q': '{http}'});
 
-  var url =
-      Uri.https('lamudateothman.pythonanywhere.com', '/code/$txt', {'q': '{http}'});
-
-  // Await the http get response, then decode the json-formatted response.
-  showDialog(
-        context: context,
-        builder: (_) => const Center(
-          child: AbsorbPointer(
-            absorbing:true,
-            child: CircularProgressIndicator(
-              backgroundColor: Color(0xFFCC1DB9),
-              color: Colors.black,
-            ),
+    // Await the http get response, then decode the json-formatted response.
+    showDialog(
+      context: context,
+      builder: (_) => const Center(
+        child: AbsorbPointer(
+          absorbing: true,
+          child: CircularProgressIndicator(
+            backgroundColor: Color(0xFFCC1DB9),
+            color: Colors.black,
           ),
         ),
-      );
+      ),
+    );
     setState(() {
-      gcode="";
+      gcode = "";
     });
-  var response = await http.get(url);
-  
-  if (response.statusCode == 200) {
-    var jsonResponse = convert.jsonDecode(response.body);
-    
-    for (var element in jsonResponse) {
-      setState(() {
-      gcode+=element+"\n";
-    });
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      for (var element in jsonResponse) {
+        setState(() {
+          gcode += element + "\n";
+        });
+      } 
+      print('Gcode : $jsonResponse.');
+      
+     
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      Navigator.pop(context);
     }
-    Navigator.pop(context);
-    print('Gcode : $jsonResponse.');
-  } else {
-    print('Request failed with status: ${response.statusCode}.');
-    Navigator.pop(context);
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -83,67 +82,70 @@ class _textToGcodeState extends State<textToGcode> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const Center(child: Text("Welcome to Gcode Converter",style: TextStyle(fontSize: 40),),),
-                const SizedBox(height: 40,),
+                const Center(
+                  child: Text(
+                    "Welcome to Gcode Converter",
+                    style: TextStyle(fontSize: 40),
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       height: 200,
-                      width: MediaQuery.of(context).size.width/2,
+                      width: MediaQuery.of(context).size.width / 2,
                       child: Column(
                         children: [
-                          
-                              
                           SizedBox(
-                            width: MediaQuery.of(context).size.width/3,
+                            width: MediaQuery.of(context).size.width / 3,
                             child: TextField(
                               controller: textController,
                               decoration: const InputDecoration(
-                                label:  Center(child: Text("Text a Converte")),
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(vertical: 90.0)
-                              ),
+                                  label: Center(child: Text("Text a Converte")),
+                                  border: OutlineInputBorder(),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 90.0)),
                             ),
                           ),
-                
                         ],
                       ),
                     ),
                     SizedBox(
-                      height:200,
-                      width: MediaQuery.of(context).size.width/2.5,
+                      height: 200,
+                      width: MediaQuery.of(context).size.width / 2.5,
                       child: Expanded(
-                        
                         flex: 1,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Text(
                             gcode,
                             style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold
-                            ),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                 const SizedBox(height: 20,),
-                 Center(
-                  child:  SizedBox(
-                        width: MediaQuery.of(context).size.width/3,
-                        child: ElevatedButton(onPressed: (){
-                          getText(textController.text);
-                        }, child: const Text("converte")),
-                      ),
+                const SizedBox(
+                  height: 20,
                 ),
-               
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          getText(textController.text);
+                        },
+                        child: const Text("converte")),
+                  ),
+                ),
               ],
             ),
           ),
-        )
-           );
+        ));
   }
 }

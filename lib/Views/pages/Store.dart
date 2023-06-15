@@ -49,12 +49,12 @@ class _StoreState extends State<Store> {
         padding: const EdgeInsets.all(10.0),
         child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1, // Number of objects in each row
+              crossAxisCount: 3, // Number of objects in each row
               crossAxisSpacing: 10.0, // Spacing between columns
               mainAxisSpacing: 10.0,
               childAspectRatio: 0.9,// Spacing between rows
             ),
-            itemCount: 80,
+            itemCount: 20,
             itemBuilder: (BuildContext ctx, index) {
               return FloatingImageCard();
             }),
